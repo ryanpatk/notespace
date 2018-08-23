@@ -1,31 +1,57 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import styled from 'styled-components'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
+import IoniconIcon from 'react-native-vector-icons/Ionicons'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+import {
+  Dimensions,
+  Platform,
+  Text,
+  View,
+} from 'react-native'
+
+const { height, width } = Dimensions.get('window')
+
+const ICON_SIZE = (width / 4)
+const BLOCK_HEIGHT = (height / 2)
+
+const Container = styled.View`
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #F5FCFF;
+`
+
+const NoteBlock = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: ${() => BLOCK_HEIGHT};
+  border: 1px solid #D3D3D3;
+`
+
+const LOGO_NAME = Platform.select({
+  ios: 'logo-apple',
+  android: 'logo-android',
 })
 
 class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to NoteSpace!</Text>
-      </View>
+      <Container>
+        <NoteBlock>
+          <IoniconIcon name={LOGO_NAME} size={ICON_SIZE} color={'#D3D3D3'} />
+        </NoteBlock>
+        <NoteBlock>
+          <IoniconIcon name={LOGO_NAME} size={ICON_SIZE} color={'#D3D3D3'} />
+        </NoteBlock>
+        <NoteBlock>
+          <IoniconIcon name={LOGO_NAME} size={ICON_SIZE} color={'#D3D3D3'} />
+        </NoteBlock>
+        <NoteBlock>
+          <IoniconIcon name={LOGO_NAME} size={ICON_SIZE} color={'#D3D3D3'} />
+        </NoteBlock>
+      </Container>
     )
   }
 }
