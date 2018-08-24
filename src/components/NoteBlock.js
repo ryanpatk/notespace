@@ -27,12 +27,20 @@ const NoteBlockView = styled.View`
   border: ${() => `1px solid ${theme.colorLightGray}`};
 `
 
+const NoteSpaceMessage = styled.Text`
+  color: ${props => props.color || theme.colorLightGray};
+  font-weight: 700;
+  text-align: center;
+  width: ${ICON_SIZE}px;
+`
+
 const NoteBlock = (props) => {
   const {
     handlePress,
     iconColor = theme.colorLightGray,
     noteCount,
     icon,
+    message,
   } = props
 
   return (
@@ -40,6 +48,7 @@ const NoteBlock = (props) => {
       <TouchableOpacity onPress={handlePress}>
         <IoniconIcon name={icon || LOGO_NAME} size={ICON_SIZE} color={iconColor} />
       </TouchableOpacity>
+      <NoteSpaceMessage color={iconColor}>{message}</NoteSpaceMessage>
     </NoteBlockView>
   )
 }

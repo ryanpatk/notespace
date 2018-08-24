@@ -5,6 +5,9 @@ import { NoteBlock } from '../components'
 import { ContextConsumer } from '../context'
 import theme from '../utils/theme'
 
+const EMPTY_NOTESPACE_MESSAGE = 'Add a new note space.'
+const EMPTY_NOTESPACE_ICON = 'ios-qr-scanner'
+
 const Container = styled.View`
   flex: 1;
   flex-direction: row;
@@ -17,17 +20,32 @@ class Home extends Component {
     this.props.navigation.navigate('Space', {})
   }
 
+  createNoteSpace = () => {
+    this.props.navigation.navigate('EditSpace', {})
+  }
+
   renderNoteBlock = data => {
     const {
-      name, icon, color, notes,
+      name, icon, color, notes = [],
     } = data
 
     return (
       <NoteBlock
         handlePress={this.openNoteSpace}
-        iconColor={color || theme.colorBlue}
-        noteCount={notes.length}
         icon={icon}
+        iconColor={color || theme.colorBlue}
+        message={name}
+        noteCount={notes.length}
+      />
+    )
+  }
+
+  renderEmptyNoteBlock = () => {
+    return (
+      <NoteBlock
+        handlePress={this.openNoteSpace}
+        icon={EMPTY_NOTESPACE_ICON}
+        message={EMPTY_NOTESPACE_MESSAGE}
       />
     )
   }
@@ -37,7 +55,14 @@ class Home extends Component {
       <ContextConsumer>
         {({ store: { noteSpaces }, actions: { increment } }) => (
           <Container>
-            {noteSpaces.map(noteSpace => this.renderNoteBlock(noteSpace))}
+            {noteSpaces.map(noteSpace => {
+              if (!!Object.keys(noteSpace).length) {
+                return this.renderNoteBlock(noteSpace)
+              } else {
+                return this.renderEmptyNoteBlock()
+              }
+            }
+          )}
           </Container>
         )}
       </ContextConsumer>

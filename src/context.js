@@ -13,7 +13,10 @@ class ContextProvider extends Component {
         icon: 'ios-home',
         color: null,
         notes: [],
-      }
+      },
+      {},
+      {},
+      {},
     ]
   }
 
@@ -39,14 +42,6 @@ class ContextProvider extends Component {
     )
   }
 }
-
-// const ContextConsumer = (props) => (
-//   <Consumer>
-//     {({ store, actions }) => (
-//       {}
-//     )}
-//   </Consumer>
-// )
 
 export {
   ContextProvider,

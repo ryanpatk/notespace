@@ -12,5 +12,5 @@ export default createStackNavigator({
     screen: Space
   }
 }, {
-  // headerMode: 'none'
+  headerMode: 'none'
 });
