@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/native'
 import { NoteBlock } from '../components'
 
 import theme from '../utils/theme'

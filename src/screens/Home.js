@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/native'
 import { NoteBlock } from '../components'
 
 import { ContextConsumer } from '../context'
@@ -34,8 +34,7 @@ class Home extends Component {
         handlePress={this.openNoteSpace}
         icon={icon}
         iconColor={color || theme.colorBlue}
-        message={name}
-        noteCount={notes.length}
+        noteCount={`${notes.length}`}
       />
     )
   }

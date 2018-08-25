@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/native'
 import IoniconIcon from 'react-native-vector-icons/Ionicons'
 import {
   Dimensions,
@@ -20,11 +20,11 @@ const LOGO_NAME = Platform.select({
 })
 
 const NoteBlockView = styled.View`
-  justify-content: center;
   align-items: center;
-  width: 50%;
-  height: ${() => BLOCK_HEIGHT};
   border: ${() => `1px solid ${theme.colorLightGray}`};
+  height: ${() => `${BLOCK_HEIGHT}px`};
+  justify-content: center;
+  width: 50%;
 `
 
 const NoteSpaceMessage = styled.Text`
@@ -34,13 +34,21 @@ const NoteSpaceMessage = styled.Text`
   width: ${ICON_SIZE}px;
 `
 
+const NoteCount = styled.Text`
+  color: ${props => props.color || theme.colorLightGray};
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  width: ${ICON_SIZE}px;
+`
+
 const NoteBlock = (props) => {
   const {
     handlePress,
-    iconColor = theme.colorLightGray,
-    noteCount,
     icon,
+    iconColor = theme.colorLightGray,
     message,
+    noteCount,
   } = props
 
   return (
@@ -48,7 +56,8 @@ const NoteBlock = (props) => {
       <TouchableOpacity onPress={handlePress}>
         <IoniconIcon name={icon || LOGO_NAME} size={ICON_SIZE} color={iconColor} />
       </TouchableOpacity>
-      <NoteSpaceMessage color={iconColor}>{message}</NoteSpaceMessage>
+      {message && <NoteSpaceMessage color={iconColor}>{message}</NoteSpaceMessage>}
+      {noteCount && <NoteCount color={iconColor}>{noteCount}</NoteCount>}
     </NoteBlockView>
   )
 }
