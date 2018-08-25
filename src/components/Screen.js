@@ -1,6 +1,7 @@
+import { SafeAreaView } from 'react-native'
 import styled from '@emotion/native'
 
-const Screen = styled.View`
+const Screen = styled(SafeAreaView)`
   flex: 1;
   flex-direction: column;
   width: 100%;

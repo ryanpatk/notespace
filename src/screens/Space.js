@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/native'
 
-import { NoteBlock, NoteScroll, Screen } from '../components'
+import { NoteBlock, NoteScroll, Screen, Header } from '../components'
 import { ContextConsumer } from '../context'
 import theme from '../utils/theme'
 
@@ -18,8 +18,7 @@ class Space extends Component {
 
           return (
             <Screen>
-              <Text>{noteSpaceId}</Text>
-              <Text>{activeNoteSpace.name}</Text>
+              <Header />
               <NoteScroll noteSpace={activeNoteSpace} />
             </Screen>
           )

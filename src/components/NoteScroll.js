@@ -17,11 +17,17 @@ const ScrollContainer = styled(FlatList)`
   padding: 10px;
 `
 
+const BottomSpacer = styled.View`
+  width: 100%;
+  padding-vertical: 10px;
+`
+
 const NoteCardLayout = styled.View`
   flex: 1;
   width: 100%;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  margin-bottom: 10px;
 `
 
 const NoteCard = styled.View`
@@ -65,6 +71,7 @@ class NoteScroll extends Component {
         keyExtractor={this.keyExtractor}
         renderItem={item => this.renderNote(item, extraNoteSpaceData)}
         numColumns={2}
+        ListFooterComponent={BottomSpacer}
       />
     )
   }
