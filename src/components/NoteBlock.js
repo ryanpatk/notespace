@@ -13,6 +13,7 @@ const { height, width } = Dimensions.get('window')
 
 const BLOCK_HEIGHT = (height / 2)
 const ICON_SIZE = (width / 3)
+const COUNT_SIZE = (ICON_SIZE / 3)
 
 const LOGO_NAME = Platform.select({
   ios: 'logo-apple',
@@ -31,15 +32,15 @@ const NoteSpaceMessage = styled.Text`
   color: ${props => props.color || theme.colorLightGray};
   font-weight: 700;
   text-align: center;
-  width: ${ICON_SIZE}px;
+  width: ${() => `${ICON_SIZE}px`};
 `
 
 const NoteCount = styled.Text`
   color: ${props => props.color || theme.colorLightGray};
-  font-size: 24px;
+  font-size: ${() => `${COUNT_SIZE}px`};
   font-weight: 700;
   text-align: center;
-  width: ${ICON_SIZE}px;
+  width: ${() => `${ICON_SIZE}px`};
 `
 
 const NoteBlock = (props) => {

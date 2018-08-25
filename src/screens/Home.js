@@ -1,23 +1,17 @@
 import React, { Component } from 'react'
 import styled from '@emotion/native'
-import { NoteBlock } from '../components'
 
+import { HomeScreen, NoteBlock } from '../components'
 import { ContextConsumer } from '../context'
 import theme from '../utils/theme'
+import generateId from '../utils/generateId';
 
 const EMPTY_NOTESPACE_MESSAGE = 'Add a new note space.'
 const EMPTY_NOTESPACE_ICON = 'ios-qr-scanner'
 
-const Container = styled.View`
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #F5FCFF;
-`
-
 class Home extends Component {
-  openNoteSpace = () => {
-    this.props.navigation.navigate('Space', {})
+  openNoteSpace = (noteSpaceId) => {
+    this.props.navigation.navigate('Space', { noteSpaceId })
   }
 
   createNoteSpace = () => {
@@ -26,15 +20,16 @@ class Home extends Component {
 
   renderNoteBlock = data => {
     const {
-      name, icon, color, notes = [],
+      name, icon, color, notes = [], id,
     } = data
 
     return (
       <NoteBlock
-        handlePress={this.openNoteSpace}
+        handlePress={() => this.openNoteSpace(id)}
         icon={icon}
         iconColor={color || theme.colorBlue}
         noteCount={`${notes.length}`}
+        key={id}
       />
     )
   }
@@ -45,6 +40,7 @@ class Home extends Component {
         handlePress={this.openNoteSpace}
         icon={EMPTY_NOTESPACE_ICON}
         message={EMPTY_NOTESPACE_MESSAGE}
+        key={generateId()}
       />
     )
   }
@@ -53,7 +49,7 @@ class Home extends Component {
     return (
       <ContextConsumer>
         {({ store: { noteSpaces }, actions: { increment } }) => (
-          <Container>
+          <HomeScreen>
             {noteSpaces.map(noteSpace => {
               if (!!Object.keys(noteSpace).length) {
                 return this.renderNoteBlock(noteSpace)
@@ -62,7 +58,7 @@ class Home extends Component {
               }
             }
           )}
-          </Container>
+          </HomeScreen>
         )}
       </ContextConsumer>
     )

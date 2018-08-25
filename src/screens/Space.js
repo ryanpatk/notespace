@@ -1,20 +1,30 @@
 import React, { Component } from 'react'
 import styled from '@emotion/native'
-import { NoteBlock } from '../components'
 
+import { NoteBlock, NoteScroll, Screen } from '../components'
+import { ContextConsumer } from '../context'
 import theme from '../utils/theme'
 
-const Container = styled.View`
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #F5FCFF;
-`
+const Text = styled.Text``
 
 class Space extends Component {
   render() {
+    const { noteSpaceId } = this.props.navigation.state.params
+
     return (
-      <Container />
+      <ContextConsumer>
+        {({ store: { noteSpaces }, actions: { increment } }) => {
+          const activeNoteSpace = noteSpaces.find(({ id }) => id === noteSpaceId)
+
+          return (
+            <Screen>
+              <Text>{noteSpaceId}</Text>
+              <Text>{activeNoteSpace.name}</Text>
+              <NoteScroll noteSpace={activeNoteSpace} />
+            </Screen>
+          )
+        }}
+      </ContextConsumer>
     )
   }
 }

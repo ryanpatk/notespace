@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import generateId from './utils/generateId'
+
+import theme from './utils/theme'
 
 const {
   Provider,
@@ -10,9 +13,19 @@ class ContextProvider extends Component {
     noteSpaces: [
       {
         name: 'Default',
+        id: generateId(),
         icon: 'ios-home',
-        color: null,
-        notes: [],
+        color: theme.colorBlue,
+        notes: [
+          {
+            text: "Here's not some text!",
+            id: generateId(),
+          },
+          {
+            text: "Here's some text!",
+            id: generateId(),
+          },
+        ],
       },
       {},
       {},
