@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
-import { Home, Space } from '../screens'
+import { Home, EditNote, Space } from '../screens'
 
 export default createStackNavigator({
   Home: {
@@ -10,7 +10,11 @@ export default createStackNavigator({
   },
   Space: {
     screen: Space
+  },
+  EditNote: {
+    screen: EditNote
   }
 }, {
-  headerMode: 'none'
+  headerMode: 'none',
+  mode: 'modal',
 });

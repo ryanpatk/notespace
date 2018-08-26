@@ -20,7 +20,7 @@ class Home extends Component {
 
   renderNoteBlock = data => {
     const {
-      name, icon, color, notes = [], id,
+      name, icon, color, noteIds = [], id,
     } = data
 
     return (
@@ -28,7 +28,7 @@ class Home extends Component {
         handlePress={() => this.openNoteSpace(id)}
         icon={icon}
         iconColor={color || theme.colorBlue}
-        noteCount={`${notes.length}`}
+        noteCount={`${noteIds.length}`}
         key={id}
       />
     )

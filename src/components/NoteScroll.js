@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import styled from '@emotion/native'
+import { withNavigation } from 'react-navigation'
 import {
   Dimensions,
   FlatList,
+  TouchableOpacity,
 } from 'react-native'
 
 import theme from '../utils/theme'
@@ -46,24 +48,26 @@ class NoteScroll extends Component {
   }
 
   renderNote = ({ item }, extraNoteSpaceData) => {
+    const { navigation } = this.props
+    const { text, id: noteId } = item
     const { color = theme.colorLightGray } = extraNoteSpaceData
-
-    console.log(color)
 
     return (
       <NoteCardLayout>
-        <NoteCard color={color}>
-          <NoteCardText>
-            {item.text}
-          </NoteCardText>
-        </NoteCard>
+        <TouchableOpacity onPress={() => navigation.navigate('EditNote', { noteId })}>
+          <NoteCard color={theme.colorYellow}>
+            <NoteCardText>
+              {text}
+            </NoteCardText>
+          </NoteCard>
+        </TouchableOpacity>
       </NoteCardLayout>
     )
   }
 
   render() {
-    const { noteSpace } = this.props
-    const { notes, ...extraNoteSpaceData } = noteSpace
+    const { noteSpace, notes } = this.props
+    const { noteIds, ...extraNoteSpaceData } = noteSpace
 
     return (
       <ScrollContainer
@@ -77,4 +81,4 @@ class NoteScroll extends Component {
   }
 }
 
-export default NoteScroll
+export default withNavigation(NoteScroll)

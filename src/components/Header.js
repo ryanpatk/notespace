@@ -27,7 +27,7 @@ class Header extends Component {
 
     return (
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <IoniconIcon name="md-arrow-round-back" size={ICON_SIZE} color={theme.colorLightGray} />
+        <IoniconIcon name="md-arrow-back" size={ICON_SIZE} color={theme.colorLightGray} />
       </TouchableOpacity>
     ) 
   }
