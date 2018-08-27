@@ -5,6 +5,7 @@ import {
   TextInput,
   Dimensions,
   Platform,
+  ScrollView,
   TouchableOpacity
 } from 'react-native'
 
@@ -16,24 +17,35 @@ const NoteContainer = styled.View`
   margin-bottom: 30px;
 `
 
-const NoteInput = styled(TextInput)`
+const NoteBackground = styled.View`
   flex: 1;
-  font-size: 18px;
   background-color: ${() => theme.colorYellow};
   padding: 20px;
   border-radius: 4px;
 `
 
+const NoteInput = styled(TextInput)`
+  font-size: 18px;
+`
+
 class Note extends Component {
+  saveNote = (data) => {
+    debugger
+  }
+
   render() {
     const { note } = this.props
 
     return (
       <NoteContainer>
-        <NoteInput
-          multiline
-          value={note.text}
-        />
+        <NoteBackground>
+          <NoteInput
+            multiline
+            value={note.text}
+            onBlur={(data) => this.saveNote(data)}
+            underlineColorAndroid="transparent"
+          />
+        </NoteBackground>
       </NoteContainer>
     )
   }
