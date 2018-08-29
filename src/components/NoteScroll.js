@@ -54,7 +54,7 @@ class NoteScroll extends Component {
 
     return (
       <NoteCardLayout>
-        <TouchableOpacity onPress={() => navigation.navigate('EditNote', { noteId })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Note', { noteId })}>
           <NoteCard color={theme.colorYellow}>
             <NoteCardText>
               {text}

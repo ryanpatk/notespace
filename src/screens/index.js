@@ -1,9 +1,9 @@
 import Home from './Home'
-import Space from './Space'
-import EditNote from './EditNote'
+import NoteSpace from './NoteSpace'
+import Note from './Note'
 
 export {
   Home,
-  Space,
-  EditNote,
+  NoteSpace,
+  Note,
 }

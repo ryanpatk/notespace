@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
 
+import { createStore } from './context/createStore'
+import { Provider } from './context/createConsumer'
+import { MOCK_NOTES, MOCK_NOTESPACES } from './context/mockData'
+
 import Navigation from './navigation'
-import { ContextProvider } from './context'
 
 class App extends Component {
-  state = {}
+  state = {
+    noteSpaces: MOCK_NOTESPACES,
+    notes: MOCK_NOTES,
+  }
 
   render() {
     return (
-      <ContextProvider>
+      <Provider value={createStore(this)}>
         <Navigation />
-      </ContextProvider>
+      </Provider>
     )
   }
 }

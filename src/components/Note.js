@@ -13,7 +13,8 @@ import theme from '../utils/theme'
 
 const NoteContainer = styled.View`
   flex: 1;
-  margin: 20px;
+  margin-vertical: 10px;
+  margin-horizontal: 20px;
   margin-bottom: 30px;
 `
 

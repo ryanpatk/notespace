@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
+import { View } from 'react-native'
 import styled from '@emotion/native'
+import { v4 as uuid } from 'uuid'
 
 import { HomeScreen, NoteBlock } from '../components'
-import { ContextConsumer } from '../context'
+import { createConsumer } from '../context/createConsumer'
 import theme from '../utils/theme'
-import generateId from '../utils/generateId';
 
 const EMPTY_NOTESPACE_MESSAGE = 'Add a new note space.'
 const EMPTY_NOTESPACE_ICON = 'ios-qr-scanner'
 
 class Home extends Component {
   openNoteSpace = (noteSpaceId) => {
-    this.props.navigation.navigate('Space', { noteSpaceId })
+    this.props.navigation.navigate('NoteSpace', { noteSpaceId })
   }
 
   createNoteSpace = () => {
-    this.props.navigation.navigate('EditSpace', {})
+    // this.props.navigation.navigate('EditSpace', {})
   }
 
-  renderNoteBlock = data => {
+  renderNoteBlock = (data) => {
     const {
       name, icon, color, noteIds = [], id,
     } = data
@@ -40,29 +41,27 @@ class Home extends Component {
         handlePress={this.openNoteSpace}
         icon={EMPTY_NOTESPACE_ICON}
         message={EMPTY_NOTESPACE_MESSAGE}
-        key={generateId()}
+        key={uuid()}
       />
     )
   }
 
   render() {
+    const { noteSpaces } = this.props
+
     return (
-      <ContextConsumer>
-        {({ store: { noteSpaces }, actions: { increment } }) => (
-          <HomeScreen>
-            {noteSpaces.map(noteSpace => {
-              if (!!Object.keys(noteSpace).length) {
-                return this.renderNoteBlock(noteSpace)
-              } else {
-                return this.renderEmptyNoteBlock()
-              }
-            }
-          )}
-          </HomeScreen>
-        )}
-      </ContextConsumer>
+      <HomeScreen>
+        {noteSpaces.map(noteSpace => {
+          if (!!Object.keys(noteSpace).length) {
+            return this.renderNoteBlock(noteSpace)
+          } else {
+            return this.renderEmptyNoteBlock()
+          }
+        }
+      )}
+      </HomeScreen>
     )
   }
 }
 
-export default Home
+export default createConsumer(Home)
