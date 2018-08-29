@@ -12,11 +12,15 @@ const EMPTY_NOTESPACE_ICON = 'ios-qr-scanner'
 
 class Home extends Component {
   openNoteSpace = (noteSpaceId) => {
-    this.props.navigation.navigate('NoteSpace', { noteSpaceId })
+    const { navigation } = this.props
+
+    navigation.navigate('NoteSpace', { noteSpaceId })
   }
 
-  createNoteSpace = () => {
-    // this.props.navigation.navigate('EditSpace', {})
+  initializeNoteSpace = (noteSpaceId) => {
+    const { navigation, actions } = this.props
+
+    navigation.navigate('EditNoteSpace', { noteSpaceId })
   }
 
   renderNoteBlock = (data) => {
@@ -35,13 +39,13 @@ class Home extends Component {
     )
   }
 
-  renderEmptyNoteBlock = () => {
+  renderEmptyNoteBlock = (noteSpaceId) => {
     return (
       <NoteBlock
-        handlePress={this.openNoteSpace}
+        handlePress={() => this.initializeNoteSpace(noteSpaceId)}
         icon={EMPTY_NOTESPACE_ICON}
         message={EMPTY_NOTESPACE_MESSAGE}
-        key={uuid()}
+        key={noteSpaceId}
       />
     )
   }
@@ -52,10 +56,10 @@ class Home extends Component {
     return (
       <HomeScreen>
         {noteSpaces.map(noteSpace => {
-          if (!!Object.keys(noteSpace).length) {
-            return this.renderNoteBlock(noteSpace)
+          if (noteSpace.isEmpty) {
+            return this.renderEmptyNoteBlock(noteSpace.id)
           } else {
-            return this.renderEmptyNoteBlock()
+            return this.renderNoteBlock(noteSpace)
           }
         }
       )}

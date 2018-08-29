@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
+// TODO - create promise wrapper to remove need for callbacks as input parameters
 export const createActions = (store) => ({
   deleteNote: (noteId, callback) => {
     const { notes, noteSpaces } = store.state
@@ -7,7 +8,7 @@ export const createActions = (store) => ({
     const updatedNotes = notes.filter(note => note.id !== noteId)
 
     const updatedNoteSpaces = noteSpaces.map(noteSpace => {
-      if (!Object.keys(noteSpace).length) {
+      if (noteSpace.isEmpty) {
         return {}
       }
 

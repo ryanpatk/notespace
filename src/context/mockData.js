@@ -44,17 +44,28 @@ const MOCK_NOTES = [
   },
 ]
 
+// Hardcoding 4 spaces for now.
 const MOCK_NOTESPACES = [
   {
     name: 'Default',
     id: uuid(),
+    isEmpty: false,
     icon: 'ios-home',
     color: theme.colorBlue,
     noteIds: MOCK_NOTES.map(({ id }) => id),
   },
-  {},
-  {},
-  {},
+  {
+    id: uuid(),
+    isEmpty: true,
+  },
+  {
+    id: uuid(),
+    isEmpty: true,
+  },
+  {
+    id: uuid(),
+    isEmpty: true,
+  },
 ]
 
 export {
