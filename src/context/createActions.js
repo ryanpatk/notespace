@@ -68,4 +68,25 @@ export const createActions = (store) => ({
       ],
     }), () => callback(newNote.id))
   },
+  editSpace: (noteSpaceId, iconName, colorName, callback) => {
+    const { noteSpaces } = store.state
+
+    const activeNoteSpaceIndex = noteSpaces.findIndex(({ id }) => id === noteSpaceId)
+    const activeNoteSpace = noteSpaces[activeNoteSpaceIndex]
+
+    const updatedNoteSpace = {
+      ...activeNoteSpace,
+      isEmpty: false,
+      colorName,
+      iconName,
+      noteIds: [],
+    }
+
+    noteSpaces.splice(activeNoteSpaceIndex, 1, updatedNoteSpace) // TODO - make immutable
+
+    store.setState(() => ({
+      ...store.state,
+      noteSpaces,
+    }), callback)
+  }
 })

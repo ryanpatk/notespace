@@ -6,6 +6,7 @@ const theme = {
   colorGreen: '#95dab6',
   colorBlue: '#83b2d0',
   colorPurple: '#7f87b2',
+  colorDeepPink: '#FF1493',
 };
 
 export default theme;

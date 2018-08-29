@@ -50,8 +50,8 @@ const MOCK_NOTESPACES = [
     name: 'Default',
     id: uuid(),
     isEmpty: false,
-    icon: 'ios-home',
-    color: theme.colorBlue,
+    iconName: 'ios-home',
+    colorName: 'colorBlue',
     noteIds: MOCK_NOTES.map(({ id }) => id),
   },
   {
