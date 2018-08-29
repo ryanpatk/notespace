@@ -1,6 +1,9 @@
+import { v4 as uuid } from 'uuid'
+
 export const createActions = (store) => ({
   deleteNote: (noteId, callback) => {
     const { notes, noteSpaces } = store.state
+
     const updatedNotes = notes.filter(note => note.id !== noteId)
 
     const updatedNoteSpaces = noteSpaces.map(noteSpace => {
@@ -19,5 +22,49 @@ export const createActions = (store) => ({
       noteSpaces: updatedNoteSpaces,
       notes: updatedNotes,
     }), callback)
-  }
+  },
+  editNote: (noteId, text) => {
+    const { notes } = store.state
+
+    const notesPosition = notes.findIndex(note => note.id === noteId)
+    const updatedNote = {
+      text,
+      id: noteId,
+    }
+
+    notes.splice(notesPosition, 1, updatedNote) // TODO - make immutable
+
+    store.setState(() => ({
+      ...store.state,
+      notes,
+    }))
+  },
+  addNote: (noteSpaceId, callback) => {
+    const { notes, noteSpaces } = store.state
+
+    const activeNoteSpaceIndex = noteSpaces.findIndex(({ id }) => id === noteSpaceId)
+    const activeNoteSpace = noteSpaces[activeNoteSpaceIndex]
+    const { noteIds } = activeNoteSpace
+
+    const newNote = {
+      id: uuid(),
+      text: '',
+    }
+
+    const updatedNoteIds = [ newNote.id, ...noteIds ]
+    const updatedNoteSpace = {
+      ...activeNoteSpace,
+      noteIds: updatedNoteIds,
+    }
+    noteSpaces.splice(activeNoteSpaceIndex, 1, updatedNoteSpace) // TODO - make immutable
+
+    store.setState(() => ({
+      ...store.state,
+      noteSpaces,
+      notes: [
+        newNote,
+        ...store.state.notes,
+      ],
+    }), () => callback(newNote.id))
+  },
 })

@@ -30,8 +30,11 @@ const NoteInput = styled(TextInput)`
 `
 
 class Note extends Component {
-  saveNote = (data) => {
-    debugger
+  saveNote = ({ nativeEvent }) => {
+    const { text } = nativeEvent
+    const { id } = this.props.note
+
+    this.props.editNote(id, text)
   }
 
   render() {
@@ -43,7 +46,7 @@ class Note extends Component {
           <NoteInput
             multiline
             value={note.text}
-            onBlur={(data) => this.saveNote(data)}
+            onEndEditing={this.saveNote}
             underlineColorAndroid="transparent"
           />
         </NoteBackground>

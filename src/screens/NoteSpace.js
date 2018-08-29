@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native'
 import styled from '@emotion/native'
 import IoniconIcon from 'react-native-vector-icons/Ionicons'
 
-import { NoteBlock, NoteScroll, Screen, Header } from '../components'
+import { NoteBlock, NoteScroll, Screen, Header, Icon } from '../components'
 import { createConsumer } from '../context/createConsumer'
 import theme from '../utils/theme'
 
@@ -11,12 +11,16 @@ const ICON_SIZE = 40
 
 class Space extends Component {
   renderAddNoteIcon = () => {
-    const { navigation } = this.props
+    const { navigation, actions } = this.props
+    const { noteSpaceId } = navigation.state.params
 
     return (
-      <TouchableOpacity onPress={() => {}}>
-        <IoniconIcon name="md-add" size={ICON_SIZE} color={theme.colorLightGray} />
-      </TouchableOpacity>
+      <Icon
+        iconName="md-add"
+        handlePress={() => {
+          actions.addNote(noteSpaceId, (noteId) => navigation.navigate('Note', { noteId }))
+        }}
+      />
     )
   }
 
