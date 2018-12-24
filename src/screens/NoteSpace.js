@@ -9,7 +9,7 @@ import theme from '../utils/theme'
 
 const ICON_SIZE = 40
 
-class Space extends Component {
+class NoteSpace extends Component {
   renderAddNoteIcon = () => {
     const { navigation, actions } = this.props
     const { noteSpaceId } = navigation.state.params
@@ -41,4 +41,4 @@ class Space extends Component {
   }
 }
 
-export default createConsumer(Space)
+export default createConsumer(NoteSpace)

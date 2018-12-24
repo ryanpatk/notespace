@@ -9,7 +9,7 @@ export const createActions = (store) => ({
 
     const updatedNoteSpaces = noteSpaces.map(noteSpace => {
       if (noteSpace.isEmpty) {
-        return {}
+        return noteSpace
       }
 
       return {
